@@ -1,0 +1,16 @@
+{
+  "recorded_at": "2026-10-22T08:01:41.107328+08:00",
+  "scope": "LOCAL PYTHON FAKE ONLY; no GenVM, real models, deployment or network consensus",
+  "python": "3.13.1",
+  "command": "python -B tests/run_local_checks.py",
+  "tests_run": 22,
+  "failures": 0,
+  "errors": 0,
+  "successful": true,
+  "artifact_hashes_at_local_test_run": {
+    "contracts/AnchorReceipt.py": "d53bf94155c164844630fca8ce3a9ddc6ffdb440db877ffdf3b4bc1b70f5a620",
+    "tests/test_anchor_receipt.py": "9ff60fb37cefdb424e786de152e952dec4b71124f6fae73a3bdb0a40f0b058a4",
+    "tests/run_local_checks.py": "b5cafe6aea0d51376d0a187fa502d5e87010c8f5115f982c573a6412ca0295c3"
+  },
+  "note": "Original local fake-backed run only. Separate later real-node receipts document two synthetic date-claim observations (SUPPORTED and CONTRADICTED); these local tests do not establish real provider behavior."
+}

@@ -1,0 +1,36 @@
+{
+  "summary_kind": "field-minimized actual node receipt; not a complete raw receipt",
+  "network": "studionet",
+  "chain_id": 61999,
+  "contract_address": "0xf20c3D5C8Ed12AC923b20150016Ee397C6636e08",
+  "transaction_hash": "0xc8e8ff726fdfdd1cfc924abf50f060355e57594afe7af782ffdbedf80cf87682",
+  "status": "FINALIZED",
+  "consensus_result": "MAJORITY_AGREE",
+  "created_at_utc": "2026-10-22T00:20:01.409098+00:00",
+  "execution_outcomes": [
+    {
+      "mode": "leader",
+      "result": "SUCCESS",
+      "cancelled_after_quorum": false
+    },
+    {
+      "mode": "validator",
+      "result": "SUCCESS",
+      "cancelled_after_quorum": false
+    }
+  ],
+  "aggregate_votes": {
+    "agree": 3,
+    "idle": 2
+  },
+  "contract_source_sha256": "d53bf94155c164844630fca8ce3a9ddc6ffdb440db877ffdf3b4bc1b70f5a620",
+  "source_matches_deployment": true,
+  "scenario_scope": "One explicit date contradiction on the same developer-controlled synthetic fixture used by the supporting case. Claim says 1 November; source states 30 October. No UNKNOWN, real-injection or heterogeneous-model evaluation is established.",
+  "omitted_fields": [
+    "sender/owner addresses",
+    "individual validator addresses",
+    "full calldata",
+    "raw arrays",
+    "unfiltered provider diagnostics"
+  ]
+}

@@ -1,6 +1,6 @@
 # Intelligent Contracts contribution draft
 
-**Submission status: draft only; not submitted to the contribution portal. A public repository has been created but the prepared source commit is still local, awaiting explicit publication approval. Studionet deployment plus registration are finalized. The semantic `check` path has not been run or verified. No points claimed.**
+**Submission status: draft prepared. On 2026-10-22 the user explicitly authorized public release and submission of this contribution. The root workflow will perform the actual source/evidence upload and portal submission; this local update does not claim either is complete. Studionet deployment, registration and two synthetic-fixture checks (`SUPPORTED` and `CONTRADICTED`) are finalized. Broader semantic/adversarial behavior is not established. No points claimed.**
 
 ## Title
 
@@ -39,8 +39,10 @@ Studionet (chain ID `61999`) contract: `0xf20c3D5C8Ed12AC923b20150016Ee397C6636e
 
 - Deployment: `0x657cfe993dd21c85f29506e2aa0de22cac8156732e8c976b626f62b6cda2f9d9`, `FINALIZED` / `MAJORITY_AGREE`; deployed source matches contract source SHA-256 `d53bf94155c164844630fca8ce3a9ddc6ffdb440db877ffdf3b4bc1b70f5a620`.
 - Registration: `0x3aeb55ccf3ab7b3d097cb8a8aa3e31f76d989d7ed90a1db691d222d0963a66c4`, `FINALIZED` / `MAJORITY_AGREE`, leader execution `SUCCESS`. The execution log also records a validator cancellation after quorum; it must not be reported as every validator completing.
+- One real source check: `0xc638c8d69c5d9921adcaf1ae999c0b07e243fe5926438591f5bcb80355b7a70e`, `FINALIZED` / `MAJORITY_AGREE`, leader execution `SUCCESS`. Receipt `1` is `SEALED` with `SUPPORTED`, HTTP `200`, body `450` bytes and SHA-256 `9b7ef32ce39692d42629c0f5f45f24a11b0f1c5a8efe63088300f85b2f256e8d`. Its exact quote is `Applications for the example workshop close on 30 October 2026 at 18:00 UTC.`, at character offsets `[211:287]`. This is a developer-controlled synthetic fixture, not a claim about a real official event. The check log also has a validator cancellation after quorum, so it does not establish every validator's completion or model diversity.
+- Second real source check: `0xc8e8ff726fdfdd1cfc924abf50f060355e57594afe7af782ffdbedf80cf87682`, `FINALIZED` / `MAJORITY_AGREE`, leader execution `SUCCESS`. Receipt `2` is `SEALED` with `CONTRADICTED`. Its claim says the same workshop closes on 1 November 2026 at 18:00 UTC; the same 450-byte source explicitly says 30 October 2026, and the exact evidence quote is again unit `3`, offsets `[211:287]`. Actual state readback confirms the verdict; transaction success alone was not treated as proof of contradiction.
 
-Missing before a strong submission: successful and adversarial real `check` observations, independent source/model comparison evidence, public raw finalized receipts, observed fee/runtime limits, and a real provider adversarial corpus. Deployment/registration alone do not prove any semantic verdict. The accompanying `NODE_VALIDATION.md` records completed work separately from those gaps. Raw evidence is currently local and excluded from the initial public source commit pending its separate evidence review.
+The completed real-node semantic evidence is limited to those two date-claim scenarios on one synthetic fixture: one supporting fact and one explicitly contradicted date. Still missing: real `UNKNOWN` observations, source/model disagreement and recovery, real prompt-injection testing, heterogeneous-model availability, maximum-payload/fee measurements and a real provider adversarial corpus. The accompanying `NODE_VALIDATION.md` records these gaps. Field-minimized receipt/state summaries have been prepared locally under `evidence/public/`; their release is authorized and will be performed by the root workflow using `RELEASE_MANIFEST.md`, excluding raw internal records.
 
 ## Limitations to include in the submission
 
@@ -52,12 +54,12 @@ AnchorReceipt is a new standalone reusable evidence primitive. It does not resub
 
 ## Links
 
-Source destination: [q3579338/genlayer-anchor-receipt](https://github.com/q3579338/genlayer-anchor-receipt). Repository created; source contents are not yet uploaded. The initial source commit is prepared locally and publication awaits approval.
+Source destination: [q3579338/genlayer-anchor-receipt](https://github.com/q3579338/genlayer-anchor-receipt). Public release was explicitly authorized on 2026-10-22. The root workflow will perform and verify the upload; this draft does not prestate its completion.
 
 Deployed contract: Studionet chain ID `61999`, `0xf20c3D5C8Ed12AC923b20150016Ee397C6636e08`.
 
-Real-node deployment and registration: the finalized transaction IDs above. Semantic observation transactions: not run or verified yet.
+Real-node deployment, registration and the two synthetic-fixture supporting/contradicting observations: the finalized transaction IDs above. `UNKNOWN` and adversarial/provider scenarios: not yet established.
 
-Demo/usage evidence: local tests, official static/schema validation and real deployment/registration. Full source retrieval and semantic observation remain unverified.
+Demo/usage evidence: local tests, official static/schema validation and two actual supporting/contradicting observations with source hashes and verbatim quotes. These are narrow synthetic examples, not a general accuracy or robustness evaluation.
 
 Never replace these status statements with invented links, transaction IDs or deployment claims.

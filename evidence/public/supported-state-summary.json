@@ -1,0 +1,41 @@
+{
+  "summary_kind": "field-minimized actual checked state; not complete raw state",
+  "network": "studionet",
+  "chain_id": 61999,
+  "contract_address": "0xf20c3D5C8Ed12AC923b20150016Ee397C6636e08",
+  "check_transaction": "0xc638c8d69c5d9921adcaf1ae999c0b07e243fe5926438591f5bcb80355b7a70e",
+  "scenario": "One developer-controlled synthetic workshop fixture; not an official live event",
+  "receipt_id": 1,
+  "attempts": 1,
+  "status": "SEALED",
+  "input": {
+    "schema": "anchor-receipt/0.1.0",
+    "source_url": "https://raw.githubusercontent.com/q3579338/genlayer-notice-delta/main/fixtures/announcement.md",
+    "claim": "Applications for the example workshop close on 30 October 2026 at 18:00 UTC.",
+    "expected_sha256": "9b7ef32ce39692d42629c0f5f45f24a11b0f1c5a8efe63088300f85b2f256e8d"
+  },
+  "input_hash": "3e0e6f3a34b5df6d5701c7a2142b7cbb111b69b029ee30b03839cf687ac3b4b8",
+  "observation": {
+    "body_bytes": 450,
+    "body_sha256": "9b7ef32ce39692d42629c0f5f45f24a11b0f1c5a8efe63088300f85b2f256e8d",
+    "http_status": 200,
+    "input_hash": "3e0e6f3a34b5df6d5701c7a2142b7cbb111b69b029ee30b03839cf687ac3b4b8",
+    "issue": "OK",
+    "quotes": [
+      {
+        "end": 287,
+        "id": 3,
+        "quote": "Applications for the example workshop close on 30 October 2026 at 18:00 UTC.",
+        "start": 211
+      }
+    ],
+    "schema": "anchor-receipt/0.1.0",
+    "verdict": "SUPPORTED"
+  },
+  "observation_hash": "bebf5f11dc7044a5aa8141dfedf9e92c2e4b8370c5e6f6b4cae7fe7975b577b4",
+  "scope": "One current HTTP response supports/contradicts a claim; source truth is not established.",
+  "omitted_fields": [
+    "owner address"
+  ],
+  "hash_note": "Input and observation hashes are actual recorded chain values. Owner is omitted from this minimized input view; retrieve the full chain state for full input-hash recomputation."
+}
