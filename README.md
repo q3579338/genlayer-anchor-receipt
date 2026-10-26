@@ -12,10 +12,10 @@ AnchorReceipt turns that check into a reusable receipt with an immutable input h
 | --- | --- |
 | Environment | Studionet, chain ID `61999` |
 | Contract | `0xf20c3D5C8Ed12AC923b20150016Ee397C6636e08` |
-| Deployment transaction | `0x657cfe993dd21c85f29506e2aa0de22cac8156732e8c976b626f62b6cda2f9d9` �� `FINALIZED`, `MAJORITY_AGREE` |
-| Registration transaction | `0x3aeb55ccf3ab7b3d097cb8a8aa3e31f76d989d7ed90a1db691d222d0963a66c4` �� `FINALIZED`, `MAJORITY_AGREE`; leader execution `SUCCESS` |
-| Supporting observation transaction | `0xc638c8d69c5d9921adcaf1ae999c0b07e243fe5926438591f5bcb80355b7a70e` �� `FINALIZED`, `MAJORITY_AGREE`; leader execution `SUCCESS` |
-| Contradicting observation transaction | `0xc8e8ff726fdfdd1cfc924abf50f060355e57594afe7af782ffdbedf80cf87682` �� `FINALIZED`, `MAJORITY_AGREE`; leader execution `SUCCESS` |
+| Deployment transaction | `0x657cfe993dd21c85f29506e2aa0de22cac8156732e8c976b626f62b6cda2f9d9` — `FINALIZED`, `MAJORITY_AGREE` |
+| Registration transaction | `0x3aeb55ccf3ab7b3d097cb8a8aa3e31f76d989d7ed90a1db691d222d0963a66c4` — `FINALIZED`, `MAJORITY_AGREE`; leader execution `SUCCESS` |
+| Supporting observation transaction | `0xc638c8d69c5d9921adcaf1ae999c0b07e243fe5926438591f5bcb80355b7a70e` — `FINALIZED`, `MAJORITY_AGREE`; leader execution `SUCCESS` |
+| Contradicting observation transaction | `0xc8e8ff726fdfdd1cfc924abf50f060355e57594afe7af782ffdbedf80cf87682` — `FINALIZED`, `MAJORITY_AGREE`; leader execution `SUCCESS` |
 | Source match | Confirmed against deployed code; contract source SHA-256 `d53bf94155c164844630fca8ce3a9ddc6ffdb440db877ffdf3b4bc1b70f5a620` |
 | Supporting state | Receipt `1`, attempt `1`, `SEALED`, `SUPPORTED`: claim states 30 October 2026 at 18:00 UTC |
 | Contradicting state | Receipt `2`, attempt `1`, `SEALED`, `CONTRADICTED`: claim states 1 November 2026 at 18:00 UTC, while source explicitly states 30 October |
@@ -48,10 +48,10 @@ These verdicts describe the source, not the truth of its contents. A malicious p
 
 ## Processing and trust boundaries
 
-1. At deployment choose 1�C16 exact public HTTPS hostnames. The list has no update method. It restricts the initial request hostname and should contain controlled, nonredirecting public sources. Lexical validation does not establish DNS safety or validate the identity of a publisher. The pinned SDK exposes no redirect policy or final-response URL; any redirect/egress protection must be verified in the actual GenVM host before deployment.
-2. An owner registers an 8�C64 character request key, a fixed HTTPS URL, a 12�C600 character claim and an optional expected SHA-256 of the response body. Ports, credentials, fragments, IP literals, local suffixes, invisible URL characters and encoded CR/LF/NUL are rejected. A source URL and a claim can never be edited after registration.
+1. At deployment choose 1–16 exact public HTTPS hostnames. The list has no update method. It restricts the initial request hostname and should contain controlled, nonredirecting public sources. Lexical validation does not establish DNS safety or validate the identity of a publisher. The pinned SDK exposes no redirect policy or final-response URL; any redirect/egress protection must be verified in the actual GenVM host before deployment.
+2. An owner registers an 8–64 character request key, a fixed HTTPS URL, a 12–600 character claim and an optional expected SHA-256 of the response body. Ports, credentials, fragments, IP literals, local suffixes, invisible URL characters and encoded CR/LF/NUL are rejected. A source URL and a claim can never be edited after registration.
 3. Deterministic code binds the normalized URL, claim, owner, optional body hash and schema version into `input_hash`. Reusing a request key returns the same receipt; reusing it for different inputs fails. Request keys belong to the caller's namespace.
-4. `check` executes a custom `gl.vm.run_nondet_unsafe` leader/validator pair. Each node independently fetches the URL. HTTP 200, a 12�C24,000 byte body, UTF-8 and an allowed content type are required. Allowed types are `text/plain`, `text/markdown` and `application/json`. HTML, PDF, rendered JavaScript pages, binary controls and oversized sources are rejected rather than silently truncated.
+4. `check` executes a custom `gl.vm.run_nondet_unsafe` leader/validator pair. Each node independently fetches the URL. HTTP 200, a 12–24,000 byte body, UTF-8 and an allowed content type are required. Allowed types are `text/plain`, `text/markdown` and `application/json`. HTML, PDF, rendered JavaScript pages, binary controls and oversized sources are rejected rather than silently truncated.
 5. Exact source text is split into at most 128 deterministic units, each at most 320 characters. Units retain their exact character offsets. The model can return only a verdict and one or two unit IDs; it cannot supply a free-form quote or narrative that becomes evidence. `UNKNOWN` must have no IDs. Duplicate, unsorted, nonexistent or boolean IDs and extra keys fail.
 6. Local code creates the quote records from the original units. The validator repeats the complete fetch/extraction/grounding process without trusting the leader's output. It accepts only exact canonical equality. It does not approve the leader merely because its JSON has the right shape.
 7. After consensus, deterministic code checks the schema, input hash, expected source hash, returned body hash, body size, every evidence unit and every exact source offset again. It drops the full source text before saving the compact observation. The accepted text crosses the nondeterministic boundary but is not kept in contract state.
@@ -79,12 +79,12 @@ The runtime rejects value on nonpayable methods. There are no payable methods, t
 ## State and recovery
 
 ```text
-register �� PENDING
-check + agreed fetch/format/model error �� RETRYABLE
-check + agreed UNKNOWN �� UNKNOWN
-check + agreed SUPPORTED/CONTRADICTED �� SEALED
-owner cancel before sealing �� CANCELLED
-consensus disagreement / VM failure �� previous state, no new journal entry
+register → PENDING
+check + agreed fetch/format/model error → RETRYABLE
+check + agreed UNKNOWN → UNKNOWN
+check + agreed SUPPORTED/CONTRADICTED → SEALED
+owner cancel before sealing → CANCELLED
+consensus disagreement / VM failure → previous state, no new journal entry
 ```
 
 `PENDING`, `RETRYABLE` and `UNKNOWN` can be checked again. A receipt permits at most 16 agreed attempts. After that, create a new receipt with a new registration key. `SEALED` and `CANCELLED` reject new checks but replaying a previously completed attempt key still returns its original receipt entry.
@@ -144,10 +144,10 @@ Checked 2026-10-22, using official documentation and SDK reference. The contract
 
 `py-genlayer:1jb45aa8ynh2a9c9xn3b7qqh8sm5q93hwfp7jqmwsfhh8jpz09h6`
 
-- [Your First Intelligent Contract](https://docs.genlayer.com/developers/intelligent-contracts/first-intelligent-contract) �� dependency directive and nondeterministic-block boundary.
-- [Equivalence Principle](https://docs.genlayer.com/developers/intelligent-contracts/equivalence-principle) �� independent source verification and custom leader/validator pattern.
-- [GenVM SDK 0.2.9 reference](https://sdk.genlayer.com/v0.2.9/api/genlayer.html) �� `gl.vm.Return`, `run_nondet_unsafe`, `TreeMap`, `exec_prompt` and `web.Response` signatures.
-- [Official GenVM source](https://github.com/genlayerlabs/genvm) �� response API cross-check performed against stable 0.2.x SDK source. The actual response field is `status`; some high-level documentation examples say `status_code`, which this contract deliberately does not use.
+- [Your First Intelligent Contract](https://docs.genlayer.com/developers/intelligent-contracts/first-intelligent-contract) — dependency directive and nondeterministic-block boundary.
+- [Equivalence Principle](https://docs.genlayer.com/developers/intelligent-contracts/equivalence-principle) — independent source verification and custom leader/validator pattern.
+- [GenVM SDK 0.2.9 reference](https://sdk.genlayer.com/v0.2.9/api/genlayer.html) — `gl.vm.Return`, `run_nondet_unsafe`, `TreeMap`, `exec_prompt` and `web.Response` signatures.
+- [Official GenVM source](https://github.com/genlayerlabs/genvm) — response API cross-check performed against stable 0.2.x SDK source. The actual response field is `status`; some high-level documentation examples say `status_code`, which this contract deliberately does not use.
 
 SDK release candidates and future network runners may expose different module layouts. The pinned source is not a claim that this prototype has been executed on the current network.
 
